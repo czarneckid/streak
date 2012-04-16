@@ -1,5 +1,7 @@
-require "streak/version"
+require 'redis'
+require 'streak/configuration'
+require 'streak/version'
 
 module Streak
-  # Your code goes here...
+  extend Configuration
 end

@@ -1,5 +1,8 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/streak/version', __FILE__)
+$:.push File.expand_path("../lib", __FILE__)
+require 'streak/version'
+
+# require File.expand_path('../lib/streak/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["David Czarnecki"]
