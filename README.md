@@ -25,13 +25,28 @@ $ gem install streak
 ## Usage
 
 ```ruby
+# Configuration
+
+Streak.configure do |configuration|
+  configuration.redis = Redis.new
+  configuration.namespace = 'streak'
+  configuration.positive_key = 'wins'
+  configuration.positive_streak_key = 'wins_streak'
+  configuration.negative_key = 'losses'
+  configuration.negative_streak_key = 'losses_streak'
+  configuration.total_key = 'total'
+end
+
 Streak.aggregate('david', 3) # 3 wins
 Streak.aggregate('david', -2) # 2 losses
 Streak.aggregate('david', 5) # 5 wins
 Streak.aggregate('david', -1) # 1 loss
 
-Streak.statistics('david').should == [0, 5, 1, 2, 11] # 0 current wins, 5 win streak, 1 current loss, 2 loss streak, 11 total "plays"
-Streak.statistics('david', [Streak.wins_streak_key, Streak.losses_streak_key]).should == [5, 2] # 5 win streak, 2 loss streak
+Streak.statistics('david')
+ => {:wins=>0, :wins_streak=>5, :losses=>1, :losses_streak=>2, :total=>11} 
+
+Streak.statistics('david', [Streak.positive_streak_key, Streak.negative_streak_key])
+ => {:wins_streak=>5, :losses_streak=>2} 
 ```
 
 ## Contributing

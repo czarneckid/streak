@@ -7,16 +7,16 @@ module Streak
     attr_writer :namespace
 
     # Key used in Redis for tracking wins.
-    attr_writer :wins_key
+    attr_writer :positive_key
 
     # Key used in Redis for tracking win streak.
-    attr_writer :wins_streak_key
+    attr_writer :positive_streak_key
 
     # Key used in Redis for tracking losses.
-    attr_writer :losses_key
+    attr_writer :negative_key
 
-    # Key used in Redis for tracking loss streak.
-    attr_writer :losses_streak_key
+    # Key used in Redis for tracking negative streak.
+    attr_writer :negative_streak_key
 
     # Key used in Redis for tracking total.
     attr_writer :total
@@ -28,10 +28,10 @@ module Streak
     #   Streak.configure do |configuration|
     #     configuration.redis = Redis.new
     #     configuration.namespace = 'streak'
-    #     configuration.wins_key = 'wins'
-    #     configuration.wins_streak_key = 'wins_streak'
-    #     configuration.losses_key = 'losses'
-    #     configuration.losses_streak_key = 'losses_streak'
+    #     configuration.positive_key = 'wins'
+    #     configuration.positive_streak_key = 'wins_streak'
+    #     configuration.negative_key = 'losses'
+    #     configuration.negative_streak_key = 'losses_streak'
     #     configuration.total_key = 'total'
     #   end
     def configure
@@ -48,29 +48,29 @@ module Streak
     # Key used in Redis for tracking wins.
     #
     # @return the key used in Redis for tracking wins or the default of 'wins' if not set.
-    def wins_key
-      @wins_key ||= 'wins'
+    def positive_key
+      @positive_key ||= 'wins'
     end
 
     # Key used in Redis for tracking wins streak.
     #
     # @return the key used in Redis for tracking wins streak or the default of 'wins_streak' if not set.
-    def wins_streak_key
-      @wins_streak_key ||= 'wins_streak'
+    def positive_streak_key
+      @positive_streak_key ||= 'wins_streak'
     end
 
     # Key used in Redis for tracking losses.
     # 
     # @return the key used in Redis for tracking losses or the default of 'losses' if not set.
-    def losses_key
-      @losses_key ||= 'losses'
+    def negative_key
+      @negative_key ||= 'losses'
     end
 
     # Key used in Redis for tracking losses streak.
     #
     # @return the key used in Redis for tracking losses streak or the default of 'losses_streak' if not set.
-    def losses_streak_key
-      @losses_streak_key ||= 'losses_streak'
+    def negative_streak_key
+      @negative_streak_key ||= 'losses_streak'
     end
 
     # Key used in Redis for tracking totals.
