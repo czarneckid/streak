@@ -24,9 +24,10 @@ $ gem install streak
 
 ## Usage
 
+Streak is configurable with respect to its keys to allow for tracking other positive/negative things in a game like wins and losses, kills and deaths, etc.
+
 ```ruby
 # Configuration
-
 Streak.configure do |configuration|
   configuration.redis = Redis.new
   configuration.namespace = 'streak'
