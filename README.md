@@ -31,8 +31,10 @@ Streak.configure do |configuration|
   configuration.redis = Redis.new
   configuration.namespace = 'streak'
   configuration.positive_key = 'wins'
+  configuration.positive_total_key = 'wins_total'
   configuration.positive_streak_key = 'wins_streak'
   configuration.negative_key = 'losses'
+  configuration.negative_total_key = 'losses_total'
   configuration.negative_streak_key = 'losses_streak'
   configuration.total_key = 'total'
 end
@@ -43,7 +45,7 @@ Streak.aggregate('david', 5) # 5 wins
 Streak.aggregate('david', -1) # 1 loss
 
 Streak.statistics('david')
- => {:wins=>0, :wins_streak=>5, :losses=>1, :losses_streak=>2, :total=>11} 
+ => {:wins=>0, :wins_total => 8, :wins_streak=>5, :losses=>1, :losses_total => 3, :losses_streak=>2, :total=>11} 
 
 Streak.statistics('david', [Streak.positive_streak_key, Streak.negative_streak_key])
  => {:wins_streak=>5, :losses_streak=>2} 

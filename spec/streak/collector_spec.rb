@@ -39,7 +39,7 @@ describe Streak::Collector do
       Streak.aggregate('david', 5)
       Streak.aggregate('david', -1)
 
-      Streak.statistics('david').should == {:wins => 0, :wins_streak => 5, :losses => 1, :losses_streak => 2, :total => 11}
+      Streak.statistics('david').should == {:wins => 0, :wins_total => 8, :wins_streak => 5, :losses => 1, :losses_total => 3, :losses_streak => 2, :total => 11}
     end
 
     it 'should return the specified list of statistics if a keys list is provided' do

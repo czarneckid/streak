@@ -13,6 +13,7 @@ module Streak
         Streak.redis.multi do |transaction|
           transaction.set("#{Streak::namespace}::#{Streak::positive_streak_key}::#{id}", [previous_wins + count, previous_streak].max)
           transaction.incrby("#{Streak::namespace}::#{Streak::positive_key}::#{id}", count.abs)
+          transaction.incrby("#{Streak::namespace}::#{Streak::positive_total_key}::#{id}", count.abs)
           transaction.set("#{Streak::namespace}::#{Streak::negative_key}::#{id}", 0)
           transaction.incrby("#{Streak::namespace}::#{Streak::total_key}::#{id}", count.abs)
         end
@@ -28,13 +29,14 @@ module Streak
         Streak.redis.multi do |transaction|
           transaction.set("#{Streak::namespace}::#{Streak::negative_streak_key}::#{id}", [previous_losses + (count.abs), previous_streak].max)
           transaction.incrby("#{Streak::namespace}::#{Streak::negative_key}::#{id}", count.abs)
+          transaction.incrby("#{Streak::namespace}::#{Streak::negative_total_key}::#{id}", count.abs)
           transaction.set("#{Streak::namespace}::#{Streak::positive_key}::#{id}", 0)
           transaction.incrby("#{Streak::namespace}::#{Streak::total_key}::#{id}", count.abs)
         end
       end
     end
 
-    def statistics(id, keys = [Streak.positive_key, Streak.positive_streak_key, Streak.negative_key, Streak.negative_streak_key, Streak.total_key])
+    def statistics(id, keys = [Streak.positive_key, Streak.positive_total_key, Streak.positive_streak_key, Streak.negative_key, Streak.negative_total_key, Streak.negative_streak_key, Streak.total_key])
       values = Streak.redis.multi do |transaction|
         keys.each do |key|
           transaction.get("#{Streak::namespace}::#{key}::#{id}")
