@@ -51,4 +51,19 @@ describe Streak::Collector do
       Streak.statistics('david', [Streak.positive_streak_key, Streak.negative_streak_key]).should == {:wins_streak => 5, :losses_streak => 2}
     end
   end
+
+  describe '#reset_statistics' do
+    it 'should reset all statistics' do
+      Streak.aggregate('david', 3)
+      Streak.aggregate('david', -2)
+      Streak.aggregate('david', 5)
+      Streak.aggregate('david', -1)
+
+      Streak.statistics('david').should == {:wins => 0, :wins_total => 8, :wins_streak => 5, :losses => 1, :losses_total => 3, :losses_streak => 2, :total => 11}
+
+      Streak.reset_statistics('david')
+
+      Streak.statistics('david').should == {:wins => 0, :wins_total => 0, :wins_streak => 0, :losses => 0, :losses_total => 0, :losses_streak => 0, :total => 0}
+    end
+  end
 end

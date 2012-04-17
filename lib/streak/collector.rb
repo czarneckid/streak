@@ -45,5 +45,13 @@ module Streak
 
       Hash[keys.map(&:to_sym).zip(values)]
     end
+
+    def reset_statistics(id)
+      Streak.redis.multi do |transaction|
+        [Streak.positive_key, Streak.positive_total_key, Streak.positive_streak_key, Streak.negative_key, Streak.negative_total_key, Streak.negative_streak_key, Streak.total_key].each do |key|
+          transaction.set("#{Streak::namespace}::#{key}::#{id}", 0)
+        end
+      end
+    end
   end
 end

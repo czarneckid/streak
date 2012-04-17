@@ -45,10 +45,14 @@ Streak.aggregate('david', 5) # 5 wins
 Streak.aggregate('david', -1) # 1 loss
 
 Streak.statistics('david')
- => {:wins=>0, :wins_total => 8, :wins_streak=>5, :losses=>1, :losses_total => 3, :losses_streak=>2, :total=>11} 
+ => {:wins=>0, :wins_total=>8, :wins_streak=>5, :losses=>1, :losses_total=>3, :losses_streak=>2, :total=>11} 
 
 Streak.statistics('david', [Streak.positive_streak_key, Streak.negative_streak_key])
- => {:wins_streak=>5, :losses_streak=>2} 
+ => {:wins_streak=>5, :losses_streak=>2}
+
+Streak.reset_statistics('david')
+Streak.statistics('david')
+ => {:wins=>0, :wins_total=>0, :wins_streak=>0, :losses=>0, :losses_total=>0, :losses_streak=>0, :total=>0} 
 ```
 
 ## Contributing
