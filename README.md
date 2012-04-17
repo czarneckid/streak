@@ -24,7 +24,15 @@ $ gem install streak
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+Streak.aggregate('david', 3) # 3 wins
+Streak.aggregate('david', -2) # 2 losses
+Streak.aggregate('david', 5) # 5 wins
+Streak.aggregate('david', -1) # 1 loss
+
+Streak.statistics('david').should == [0, 5, 1, 2, 11] # 0 current wins, 5 win streak, 1 current loss, 2 loss streak, 11 total "plays"
+Streak.statistics('david', [Streak.wins_streak_key, Streak.losses_streak_key]).should == [5, 2] # 5 win streak, 2 loss streak
+```
 
 ## Contributing
 
