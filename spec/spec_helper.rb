@@ -19,4 +19,8 @@ RSpec.configure do |config|
     Streak.redis.flushdb
     Streak.redis.quit
   end
+
+  def streak_value_for(key, id)
+    Streak.redis.get("#{Streak::namespace}::#{key}::#{id}").to_i
+  end
 end
