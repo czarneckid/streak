@@ -1,6 +1,6 @@
-# Streak
+# streak
 
-Streak is a gem for calculating win/loss streaks. It uses Redis as its backend for collecting the data.
+streak is a gem for calculating win/loss streaks. It uses Redis as its backend for collecting the data.
 
 ## Installation
 
@@ -24,7 +24,7 @@ $ gem install streak
 
 ## Usage
 
-Streak is configurable with respect to its keys to allow for tracking other positive/negative things in a game like wins and losses, kills and deaths, etc.
+streak is configurable with respect to its keys to allow for tracking other positive/negative things in a game like wins and losses, kills and deaths, etc.
 
 ```ruby
 # Configuration
