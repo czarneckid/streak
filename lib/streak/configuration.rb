@@ -25,7 +25,7 @@ module Streak
     attr_writer :negative_streak_key
 
     # Key used in Redis for tracking total.
-    attr_writer :total
+    attr_writer :total_key
     
     # Yield self to be able to configure Streak with block-style configuration.
     #
@@ -99,7 +99,7 @@ module Streak
     #
     # @return the key used in Redis for tracking total or the default of 'total' if not set.
     def total_key
-      @total ||= 'total'
+      @total_key ||= 'total'
     end
   end
 end
