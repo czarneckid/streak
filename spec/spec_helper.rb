@@ -21,6 +21,6 @@ RSpec.configure do |config|
   end
 
   def streak_value_for(key, id)
-    Streak.redis.get("#{Streak.namespace}::#{key}::#{id}").to_i
+    Streak.redis.get("#{Streak.namespace}:#{key}:#{id}").to_i
   end
 end
