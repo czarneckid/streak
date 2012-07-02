@@ -46,14 +46,48 @@ Streak.aggregate('david', 5) # 5 wins
 Streak.aggregate('david', -1) # 1 loss
 
 Streak.statistics('david')
- => {:wins=>0, :wins_total=>8, :wins_streak=>5, :losses=>1, :losses_total=>3, :losses_streak=>2, :total=>11} 
+ => {:wins=>0, :wins_total=>8, :wins_streak=>5, :losses=>1, :losses_total=>3, :losses_streak=>2, :total=>11}
 
 Streak.statistics('david', [Streak.positive_streak_key, Streak.negative_streak_key])
  => {:wins_streak=>5, :losses_streak=>2}
 
 Streak.reset_statistics('david')
 Streak.statistics('david')
- => {:wins=>0, :wins_total=>0, :wins_streak=>0, :losses=>0, :losses_total=>0, :losses_streak=>0, :total=>0} 
+ => {:wins=>0, :wins_total=>0, :wins_streak=>0, :losses=>0, :losses_total=>0, :losses_streak=>0, :total=>0}
+```
+
+You can also pass a custom set of keys to be used in the `aggregate` call if you want to
+use a different set of positive/negative things than what is setup in the configuration.
+Below is a complete example:
+
+```ruby
+custom_keys = {
+  :positive_key => 'kills',
+  :positive_total_key => 'kills_total',
+  :positive_streak_key => 'kills_streak',
+  :negative_key => 'deaths',
+  :negative_total_key => 'deaths_total',
+  :negative_streak_key => 'deaths_streak',
+  :total_key => 'kills_deaths_total'
+}
+
+Streak.aggregate('david', 1, custom_keys)
+Streak.aggregate('david', -7, custom_keys)
+Streak.aggregate('david', 6, custom_keys)
+Streak.aggregate('david', -3, custom_keys)
+
+Streak.aggregate('david', 3)
+Streak.aggregate('david', -2)
+Streak.aggregate('david', 5)
+Streak.aggregate('david', -1)
+
+Streak.statistics('david')
+ => {:wins=>0, :wins_total=>8, :wins_streak=>5, :losses=>1, :losses_total=>3, :losses_streak=>2, :total=>11}
+Streak.statistics('david', custom_keys.values)
+ => {:kills=>0, :kills_total=>7, :kills_streak=>6, :deaths=>3, :deaths_total=>10, :deaths_streak=>7, :kills_deaths_total=>17}
+
+Streak.reset_statistics('david')
+Streak.reset_statistics('david', custom_keys.values)
 ```
 
 ## Contributing
