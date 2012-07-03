@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.3.0 (in progress)
+
+* Use of Redis hashes to store data.
+* Added `remove_statistics(id)` method to remove all streak data for a given ID.
+
 ## 0.2.0 (2012-07-02)
 
 * You can now pass a custom set of keys to be used in the `aggregate` call if you want to

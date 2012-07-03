@@ -90,6 +90,8 @@ Streak.reset_statistics('david')
 Streak.reset_statistics('david', custom_keys.values)
 ```
 
+You can remove all data for a given ID using the `remove_statistics(id)` method.
+
 ## Contributing
 
 1. Fork it
