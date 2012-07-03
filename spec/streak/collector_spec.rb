@@ -110,4 +110,20 @@ describe Streak::Collector do
       Streak.statistics('david', custom_keys.values).should == {:kills => 0, :kills_total => 0, :kills_streak => 0, :deaths => 0, :deaths_total => 0, :deaths_streak => 0, :kills_deaths_total => 0}
     end
   end
+
+  describe '#remove_statistics' do
+    it 'should remove all the statistics for a given ID' do
+      Streak.aggregate('david', 3)
+      Streak.aggregate('david', -2)
+      Streak.aggregate('david', 5)
+      Streak.aggregate('david', -1)
+
+      Streak.statistics('david').should == {:wins => 0, :wins_total => 8, :wins_streak => 5, :losses => 1, :losses_total => 3, :losses_streak => 2, :total => 11}
+
+      Streak.remove_statistics('david')
+      Streak.statistics('david').should == {:wins => 0, :wins_total => 0, :wins_streak => 0, :losses => 0, :losses_total => 0, :losses_streak => 0, :total => 0}
+
+      Streak.redis.exists("#{Streak.namespace}:david").should be_false
+    end
+  end
 end
