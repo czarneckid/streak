@@ -84,7 +84,7 @@ module Streak
     # Remove all the statistics for a given +id+.
     #
     # @param id [String] ID.
-    def remove_statistics(id)
+    def remove_all_statistics(id)
       Streak.redis.del("#{Streak.namespace}:#{id}")
     end
 

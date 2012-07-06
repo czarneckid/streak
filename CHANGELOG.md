@@ -1,9 +1,9 @@
 # CHANGELOG
 
-## 0.3.0 (in progress)
+## 0.3.0 (2012-07-06)
 
 * Use of Redis hashes to store data.
-* Added `remove_statistics(id)` method to remove all streak data for a given ID.
+* Added `remove_all_statistics(id)` method to remove all streak data for a given ID.
 
 ## 0.2.0 (2012-07-02)
 
