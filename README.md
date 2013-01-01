@@ -102,4 +102,4 @@ You can remove all data for a given ID using the `remove_all_statistics(id)` met
 
 ## Copyright
 
-Copyright (c) 2012 David Czarnecki. See LICENSE for further details.
+Copyright (c) 2012-2013 David Czarnecki. See LICENSE for further details.
